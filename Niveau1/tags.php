@@ -58,7 +58,7 @@
                 <section>
                     <h3>Présentation</h3>
                     <p>Sur cette page vous trouverez les derniers messages comportant
-                        le mot-clé XXX
+                        le mot-clé
                         (n° <?php echo $tagId ?>)
                     </p>
 
