@@ -9,7 +9,7 @@
 
     $header ='  <header>
                     <a href="admin.php">
-                        <img src="resoc.jpg" alt="Logo de notre réseau social"/>
+                        <img src="tortue.png" alt="Logo de notre réseau social"/>
                     </a>
                     <nav id="menu">
                         <a href="news.php">Actualités</a>
