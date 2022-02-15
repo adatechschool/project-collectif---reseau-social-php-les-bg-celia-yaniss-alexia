@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="fr">
-    <?php
-        include('refactoring.php');
-        echo $head;
-    ?>
+<?php
+    include('refactoring.php');
+    echo $head;
+?>
     <body>
         <?php
             echo $header;
