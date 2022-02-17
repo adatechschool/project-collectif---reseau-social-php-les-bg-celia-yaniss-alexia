@@ -1,13 +1,18 @@
 body{
-    background-color: #D1A179;
-    font-family: Arial;
+    background-color: #181818;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Helvetica, sans-serif;
 }
 
-a{text-decoration: none; color:black;}
+#author{
+ color: #3366BB;
+}
+
+a{text-decoration: none; color:rgb(233, 233, 233);}
 a:hover{text-decoration: underline;}
 
+
 body>header{
-    background-color: #fff;
+    background-color: #3b3838;
     display:flex;
     width:80em;
     margin:0 auto 2em auto;    
@@ -21,24 +26,24 @@ body>header #menu {
     display:flex;
     width:50%;
     align-items: stretch;
-    border-left: 1px solid #D1A179;
+    border-left: 1px solid #181818;
 }
 body>header #menu a{
     flex:1;
     text-align: center;
     padding-top:2em;
-    border-right: 1px solid #D1A179;
+    border-right: 1px solid #181818;
 }
 body>header a:hover
 {
-    background-color: #D1A179;
+    background-color: #181818;
 }
 body>header ul{list-style: none;}
 body>header #user
 {
     margin-left: auto;
     flex:0.2;
-    border-left: 1px solid #D1A179;
+    border-left: 1px solid #181818;
 }
 body>header #user>a{
     display:block;
@@ -53,7 +58,7 @@ body>header #user ul{
     margin:0;
     margin-left:-5em;
     background-color: #fff;
-    border: 1px solid #D1A179;
+    border: 1px solid #181818;
 
     z-index: 1;
 }
@@ -61,12 +66,16 @@ body>header #user ul li a{
     display:block;
     width:10em;
     padding:1em;
-    border-bottom: 1px solid #D1A179;
+    border-bottom: 1px solid #181818;
+    background-color: #181818;
 }
 body>header #user:hover ul{
     display:block;
 }
 
+h3{
+    color:rgb(233, 233, 233);
+}
 
 #wrapper{
     display:flex;    
@@ -74,7 +83,7 @@ body>header #user:hover ul{
     margin:0 auto 2em auto;
 }
 #wrapper aside{
-    background-color: #fff;
+    background-color: #3b3838;
     flex:1;
     padding:1em;
     border-radius: 1em;    
@@ -92,7 +101,7 @@ body>header #user:hover ul{
     overflow-y:  scroll;
 }
 #wrapper main article{
-    background-color: #fff;
+    background-color: #3b3838;
     padding:1em;
     margin-bottom: 1em ;
     border-radius: 1em;
@@ -102,6 +111,7 @@ body>header #user:hover ul{
     padding:0;
     font-weight: normal;
     font-size:1em;
+    color:rgb(233, 233, 233);
 
 }
 #wrapper main article time{
@@ -113,10 +123,12 @@ body>header #user:hover ul{
 }
 #wrapper main article p{
     margin:0;
+    color:rgb(233, 233, 233);
 }
 #wrapper main article footer{
     margin-top: 1em;
     text-align: right;
+    color:rgb(233, 233, 233);
 }
 #wrapper main article footer small{
     float:left;
@@ -124,16 +136,16 @@ body>header #user:hover ul{
 
 #wrapper.admin{flex-direction: row-reverse}
 #wrapper.admin aside{flex:1;margin-left:1em;border-radius:0;padding:0;}
-#wrapper.admin main{flex:2;background-color: #fff;border-radius: 0;padding:0;}
+#wrapper.admin main{flex:2;background-color: #3b3838;border-radius: 0;padding:0;}
 #wrapper.admin h2{text-align: center;}
 #wrapper.admin h3{margin:0;}
 #wrapper.admin nav{text-align: right;}
-#wrapper.admin article{border:1px solid #ddd;border-radius: 1em;padding:1em;margin:1em;}
+#wrapper.admin article{border:1px solid #3b3838;border-radius: 1em;padding:1em;margin:1em;}
 #wrapper.admin article p{float:left;margin:0;}
 
 
-.parameters dl dt{float:left;font-weight: bold;line-height: 1.5em;}
-.parameters dl dd{margin-left:15em;line-height: 1.5em;}
+.parameters dl dt{float:left;font-weight: bold;line-height: 1.5em; color: rgb(233, 233, 233);}
+.parameters dl dd{margin-left:15em;line-height: 1.5em; color: rgb(233, 233, 233);}
 
 .contacts {
     display:flex;
@@ -151,13 +163,11 @@ body>header #user:hover ul{
     height: 5em;
 }
 
-/* .contacts textarea{
-color: aqua;
-} */
+
 pre{
     color:#aaa;
 }
 
 form dl dt{float:left;font-weight: bold;line-height: 1.5em;}
-form dl dd{margin-left:10em;line-height: 1.5em;margin-bottom: 1em}
-form dl dd textarea{width:40em;height: 15em;}
+form dl dd{margin-left:5em;line-height: 1.5em;margin-bottom: 1em}
+form dl dd textarea{width:150px;height: 100px;}

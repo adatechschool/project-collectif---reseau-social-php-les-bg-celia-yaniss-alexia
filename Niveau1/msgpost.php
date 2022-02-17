@@ -64,18 +64,18 @@ session_start();
                     . "NULL);"
                 ;
 
-                echo $lInstructionSql;
+                // echo $lInstructionSql;
 
                 // Etape 5 : exécution
                 $ok = $mysqli->query($lInstructionSql);
                 if ( ! $ok) {
                     echo "Impossible d'ajouter le message: " . $mysqli->error;
                 } else {
-                    echo "Message posté en tant que :" . $listAuteurs[$authorId];
+                    echo "Message posté en tant que: " . $listAuteurs[$authorId];
                 }
             } ?>
 
-            <form action="usurpedpost.php" method="post">
+            <form action="msgpost.php" method="post">
                 <input type='hidden' name='id' value='achanger'>
                 <dl>
                     <dt><label for='auteur'>Auteur</label></dt>

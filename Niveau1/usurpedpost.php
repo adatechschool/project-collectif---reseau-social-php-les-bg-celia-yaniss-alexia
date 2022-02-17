@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="fr">
 <?php
@@ -16,10 +19,13 @@
                 <p>Sur cette page on peut poster un message en se faisant 
                     passer pour quelqu'un d'autre</p>
             </aside>
-            <main>
+<main>
                 <article>
                     <h2>Poster un message</h2>
-                    <?php
+                    
+                <?php
+                    $userId = $_SESSION['connected_id'];
+
                     /*BD*/
                     $mysqli = new mysqli("localhost", "root", "", "socialnetwork");
                     /* Récupération de la liste des auteurs*/
@@ -38,7 +44,7 @@
                     if ($enCoursDeTraitement)
                     {
                         // Récupérer ce qu'il y a dans le formulaire
-                         echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                        //  echo "<pre>" . print_r($_POST, 1) . "</pre>";
                         $authorId = $_POST['auteur'];
                         $postContent = $_POST['message'];
 
@@ -54,7 +60,7 @@
                                 . $authorId . ", "
                                 . "'" . $postContent . "', "
                                 . "NOW()".")";
-                        echo $lInstructionSql;
+                        // echo $lInstructionSql;
                         // Execution
                         $ok = $mysqli->query($lInstructionSql);
                         if ( ! $ok)
@@ -62,7 +68,7 @@
                             echo "Impossible d'ajouter le message: " . $mysqli->error;
                         } else
                         {
-                            echo "Message posté en tant que :" . $listAuteurs[$authorId];
+                            echo "Message posté en tant que: " . $listAuteurs[$authorId];
                         }
                     }
                     ?>                     

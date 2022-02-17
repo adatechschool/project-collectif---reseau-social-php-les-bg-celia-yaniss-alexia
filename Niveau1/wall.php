@@ -16,7 +16,8 @@ session_start();
             /** AFFICHER LES POST SUR LE MUR
              * Documentation : https://www.php.net/manual/fr/reserved.variables.get.php*/
             $userId = $_SESSION['connected_id'];
-            $userId =intval($_GET['user_id']);
+            $userIdtwo =intval($_GET['user_id']);
+
             ?>
             <?php
             /*Etape 2: se connecter à la base de donnée*/
@@ -34,9 +35,81 @@ session_start();
                 <img src="neon.png" alt="Portrait de l'utilisatrice"/>
                 <section>
                     <h3>Présentation</h3>
-                    <p>Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias'] ?>
-                        (n° <?php echo $user['id'] ?>)
+                    <p style="color:white;">Sur cette page vous trouverez tous les message de l'utilisatrice : <?php echo $user['alias']?>
+                        (n° <?php echo $_SESSION['connected_id'] ?>)
                     </p>
+                    <article>
+        <h2>Poster un message</h2>
+    <?php
+            $userId = $_SESSION['connected_id'];
+
+            // BD
+            $mysqli = new mysqli("localhost", "root", "", "socialnetwork");
+            // Récupération de la liste des auteurs
+            $listAuteurs = [];
+            $laQuestionEnSql = "SELECT * FROM users WHERE id = $userId";
+            $lesInformations = $mysqli->query($laQuestionEnSql);
+            while ($user = $lesInformations->fetch_assoc()) {
+                $listAuteurs[$user['id']] = $user['alias'];
+            }
+
+
+            /* TRAITEMENT DU FORMULAIRE
+            Etape 1 : vérifier si on est en train d'afficher ou de traiter le formulaire
+            Si on reçoit un champ email rempli, il y a une chance que ce soit un traitement */
+            $enCoursDeTraitement = isset($_POST['auteur']);
+            if ($enCoursDeTraitement) {
+                /* On ne fait ce qui suit que si un formulaire a été soumis.
+                
+                Etape 2 : récupérer ce qu'il y a dans le formulaire @todo: c'est là que votre travail se situe
+                Observez le résultat de cette ligne de débug (vous l'effacerez ensuite) */
+                // echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                // et complétez le code ci dessous en remplaçant les ???
+                $authorId = $_POST['auteur'];
+                $postContent = $_POST['message'];
+
+
+                // Etape 3 : Petite sécurité pour éviter les injections sql : https://www.w3schools.com/sql/sql_injection.asp
+                $authorId = intval($mysqli->real_escape_string($authorId));
+                $postContent = $mysqli->real_escape_string($postContent);
+
+                // Etape 4 : construction de la requête
+                $lInstructionSql = "INSERT INTO posts "
+                    . "(id, user_id, content, created, parent_id) "
+                    . "VALUES (NULL, "
+                    . $authorId . ", "
+                    . "'" . $postContent . "', "
+                    . "NOW(), "
+                    . "NULL);"
+                ;
+
+                // echo $lInstructionSql;
+
+                // Etape 5 : exécution
+                $ok = $mysqli->query($lInstructionSql);
+                if ( ! $ok) {
+                    echo "Impossible d'ajouter le message: " . $mysqli->error;
+                } else {
+                    echo "Message posté en tant que: " . $listAuteurs[$authorId];
+                }
+            } ?>
+
+            <form action="wall.php?user_id='.$_SESSION['connected_id'].'" method="post">
+                <input type='hidden' name='id' value='achanger'>
+                <dl>
+                    <dt><label for='auteur'>Auteur</label></dt>
+                    <dd><select name='auteur'>
+                            <?php
+                            foreach ($listAuteurs as $id => $alias)
+                                echo "<option value='$id'>$alias</option>";
+                            ?>
+                        </select></dd>
+                    <dt><label for='message'>Message</label></dt>
+                    <dd><textarea id="form" name='message'></textarea></dd>
+                </dl>
+                <input type='submit'>
+            </form>               
+        </article>
                 </section>
             </aside>
             <main>
@@ -75,7 +148,7 @@ session_start();
                         // on ne fait ce qui suit que si un formulaire a été soumis.
                         // Etape 2: récupérer ce qu'il y a dans le formulaire @todo: c'est là que votre travaille se situe
                         // observez le résultat de cette ligne de débug (vous l'effacerez ensuite)
-                         echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                        //  echo "<pre>" . print_r($_POST, 1) . "</pre>";
                         // et complétez le code ci dessous en remplaçant les ???
                         $authorId = $_POST['auteur'];
                         $postContent = $_POST['message'];
@@ -92,7 +165,7 @@ session_start();
                                 . $authorId . ", "
                                 . "'" . $postContent . "', "
                                 . "NOW()".")";
-                        echo $lInstructionSqlTwo;
+                        // echo $lInstructionSqlTwo;
                         // Etape 5 : execution
                         $ok = $mysqli->query($lInstructionSqlTwo);
                         if ( ! $ok)
@@ -113,7 +186,7 @@ session_start();
                         <h3>
                             <time><?php echo $post['created'] ?></time>
                         </h3>
-                        <address><a href="wall.php?user_id=<?php echo $post['user_id'] ?>"><?php echo $post['author_name'] ?></a></address>
+                        <address ><a id="author" href="wall.php?user_id=<?php echo $post['user_id'] ?>"><?php echo $post['author_name'] ?></a></address>
                         <div>
                             <p><?php echo $post['content'] ?></p>
                         </div>                                            

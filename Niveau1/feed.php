@@ -21,27 +21,23 @@
             $userId = intval($_GET['user_id']);
             ?>
             <?php
-            /**
-             * Etape 2: se connecter à la base de donnée
-             */
+            /*Se connecter à la base de donné*/
             $mysqli = new mysqli("localhost", "root", "", "socialnetwork");
             ?>
 
             <aside>
                 <?php
-                /**
-                 * Etape 3: récupérer le nom de l'utilisateur
-                 */
+                /*Récupérer le nom de l'utilisateur*/
                 $laQuestionEnSql = "SELECT * FROM `users` WHERE id= '$userId' ";
                 $lesInformations = $mysqli->query($laQuestionEnSql);
                 $user = $lesInformations->fetch_assoc();
-                //@todo: afficher le résultat de la ligne ci dessous, remplacer XXX par l'alias et effacer la ligne ci-dessous
-                echo "<pre>" . print_r($user, 1) . "</pre>";
+
+                // echo "<pre>" . print_r($user, 1) . "</pre>";
                 ?>
-                <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
+                <img src="neon.png" alt="Portrait de l'utilisatrice"/>
                 <section>
                     <h3>Présentation</h3>
-                    <p>Sur cette page vous trouverez tous les message des utilisatrices
+                    <p style="color:white;">Sur cette page vous trouverez tous les message des utilisatrices
                         auxquel est abonnée l'utilisatrice <a href="wall.php?user_id=<?php echo $userId ?>"><?php echo $user['alias'] ?></a>
                         (n° <?php echo $userId ?>)
                     </p>

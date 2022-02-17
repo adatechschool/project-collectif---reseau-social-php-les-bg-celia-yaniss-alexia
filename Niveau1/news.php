@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="fr">
 <?php
@@ -10,10 +13,10 @@
         ?>
         <div id="wrapper">
             <aside>
-                <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
+                <img src="neon.png" alt="Portrait de l'utilisatrice"/>
                 <section>
                     <h3>Présentation</h3>
-                    <p>Sur cette page vous trouverez les derniers messages de
+                    <p style="color:white;">Sur cette page vous trouverez les derniers messages de
                         tous les utilisatrices du site.</p>
                 </section>
             </aside>
